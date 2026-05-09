@@ -50,10 +50,11 @@ class Program
 
                 switch (action)
                 {
-                   /* case "1":
+                    case "1":
                         garage!.ParkedVehicles();
+                        Pause();
                         break;
-
+                    /*
                     case "2":
                         garage!.VehiclesByType();
                         break;
@@ -96,11 +97,11 @@ class Program
     static void CreateGarage()
     {
         Console.Clear();
-        Console.WriteLine("▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
-        Console.WriteLine();
-        Console.WriteLine("=== BUILDING A NEW GARAGE ===");
-        Console.WriteLine();
-        Console.WriteLine("▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                               |");
+        Console.WriteLine("| === BUILDING A NEW GARAGE === |");
+        Console.WriteLine("|                               |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
         Console.WriteLine();
         Console.WriteLine("| Welcome! Before using the system, you need to create a garage.");
         Console.WriteLine("|");
@@ -141,6 +142,7 @@ class Program
             return;
         }
         Console.Clear();
+        Console.WriteLine();
         Console.WriteLine("How many vehicles do you want to add? (max " + garage!.Capacity + "): ");
 
         int amount;
@@ -150,23 +152,23 @@ class Program
             Console.Write("| Invalid input. Please enter a valid number of vehicles to add (1-" + garage!.Capacity + "): ");
         }
 
+        Console.Clear();
+
         for (int i = 0; i < amount; i++)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Adding vehicle {i + 1} of {amount}...");
-            Console.WriteLine();
             AddVehicle();
         }
+        
     }
 
     static void AddVehicle()
     {
         Console.Clear();
-        Console.WriteLine("▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
-        Console.WriteLine();
-        Console.WriteLine("===== ADD A NEW VEHICLE =====");
-        Console.WriteLine();
-        Console.WriteLine("▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                             |");
+        Console.WriteLine("| ==== ADD A NEW VEHICLE ==== |");
+        Console.WriteLine("|                             |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
         Console.WriteLine();
         Console.WriteLine("| Adding a new vehicle to the garage.");
         Console.WriteLine("|");
@@ -226,12 +228,14 @@ class Program
         if (added)
         {
             Console.WriteLine($"Vehicle {vehicle.RegNumber} added to the garage.");
+            CountDownToMenu();
         }
         else
         {
             Console.WriteLine("Garage is full. Cannot add more vehicles.");
+            CountDownToMenu();
         }
-        CountDownToMenu();
+        
         
     }   
 

@@ -40,4 +40,36 @@ class Garage
         }
         return false;
     }
+
+    public void ParkedVehicles()
+    {
+        Console.Clear();
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄ ");
+        Console.WriteLine("|                                   |");
+        Console.WriteLine("|   PARKED VEHICLES IN THE GARAGE   |");
+        Console.WriteLine("|                                   |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ ");
+        Console.WriteLine();
+
+        bool foundVehicle = false;
+        int vehicleNr = 1;
+
+        Console.WriteLine("| No.   Type            RegNr       Color         Wheels |");
+        Console.WriteLine("| ------------------------------------------------------ |");
+
+        foreach (Vehicle? parkedVehicle in vehicles)
+        {
+            if (parkedVehicle != null)
+            {
+                Console.WriteLine($"| [{vehicleNr}] {parkedVehicle.GetType().Name,-15} {parkedVehicle.RegNumber,-12} {parkedVehicle.Color,-14} {parkedVehicle.WheelAmount,-6} |");
+                vehicleNr++;
+                foundVehicle = true;
+            }
+        }
+
+        if (!foundVehicle)
+        {
+            Console.WriteLine("~ No parked vehicles found. ~");
+        }
+    }
 }
