@@ -217,6 +217,21 @@ class Program
                 CountDownToMenu();
                 return;
         }
+
+        Console.WriteLine();
+        bool added = garage!.AddVehicle(vehicle);
+
+        Console.WriteLine();
+
+        if (added)
+        {
+            Console.WriteLine($"Vehicle {vehicle.RegNumber} added to the garage.");
+        }
+        else
+        {
+            Console.WriteLine("Garage is full. Cannot add more vehicles.");
+        }
+        CountDownToMenu();
         
     }   
 
@@ -264,6 +279,13 @@ class Program
         }
 
         return value;
+    }
+
+    static void Pause()
+    {
+    Console.WriteLine();
+    Console.WriteLine("Press any key to return to menu...");
+    Console.ReadKey();
     }
 
 
