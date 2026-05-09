@@ -4,13 +4,11 @@ using System.Threading;
 
 
 
-
-
 namespace GarageConsoleApp;
 
-class Car : Vehicle
+class Motorcycle : Vehicle
 {
-    public Car(string regNumber, string color, int wheelAmount)
+    public Motorcycle(string regNumber, string color, int wheelAmount)
         : base(regNumber, color, wheelAmount)
     {
     }

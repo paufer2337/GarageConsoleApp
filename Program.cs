@@ -197,7 +197,6 @@ class Program
         switch (action)
         {
             case "1":
-                string
                 vehicle = new Car(regNumber, color, wheelAmount);
                 break;
             case "2":
@@ -213,7 +212,8 @@ class Program
                 vehicle = new Airplane(regNumber, color, wheelAmount);
                 break;
             default:
-                Console.WriteLine("Invalid selection. Returning to menu.");
+                Console.WriteLine();
+                Console.WriteLine("Invalid selection.");
                 CountDownToMenu();
                 return;
         }
