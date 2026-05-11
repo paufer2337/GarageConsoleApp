@@ -15,7 +15,7 @@ public abstract class Vehicle
 
     protected Vehicle(string regNumber, string color, int wheelAmount)
     {
-        RegNumber = regNumber.ToUpper();
+        RegNumber = regNumber.Replace(" ", "").Replace("-", "").ToUpper();
         Color = color;
         WheelAmount = wheelAmount;
     }

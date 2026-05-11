@@ -66,7 +66,7 @@ class Program
                     case "4":
                         RemoveVehicle();
                         break;
-                    /*
+                    
                     case "5":
                         SearchByRegNr();
                         break;
@@ -74,7 +74,7 @@ class Program
                     case "6":
                         SearchByProperties();
                         break;
-*/
+
                     case "7":
                         CreateGarage();
                         PopulateGarage();
@@ -191,7 +191,7 @@ class Program
 
         Console.WriteLine();
 
-        string regNumber = GetValidText("Enter registration number: ").ToUpper();
+        string regNumber = GetValidText("Enter registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
         string color = GetValidText("Enter color: ");
         int wheelAmount = GetValidInt("Enter number of wheels: ");
 
@@ -265,7 +265,38 @@ class Program
         }
 
         CountDownToMenu();
-    }  
+    } 
+
+    static void SearchByRegNr()
+    {
+        Console.Clear();
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                             |");
+        Console.WriteLine("|   SEARCH VEHICLE BY REGNR   |");
+        Console.WriteLine("|                             |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine();
+        Console.WriteLine("| Searching for a vehicle by registration number.");
+        Console.WriteLine("|");
+        string regNumber = GetValidText("| Enter registration number to search: ").ToUpper();
+
+        Vehicle? foundVehicle = garage!.FindByRegNr(regNumber);
+
+        Console.WriteLine();
+
+        if (foundVehicle != null)
+        {
+            Console.WriteLine("Vehicle found:");
+            Console.WriteLine(foundVehicle.GetInfo());
+        }
+        else
+        {
+            Console.WriteLine();
+            Console.WriteLine($"No vehicle with registration number {regNumber} found in the garage.");
+        }
+
+        CountDownToMenu();
+    } 
 
     static string GetValidText(string message)
     {
