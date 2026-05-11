@@ -19,11 +19,11 @@ ___________________________________________________________
 |   Vehicle         = Gemensam basklass för alla fordon                       |
 
 ~ Subklasser:
-|   Car             = Bil                                                     |
-|   Motorcycle      = Motorcykel                                              |
-|   Bus             = Buss                                                    |
-|   Boat            = Båt                                                     |
-|   Airplane        = Flygplan                                                |
+|   Car                                                                       |
+|   Motorcycle                                                                |
+|   Bus                                                                       |
+|   Boat                                                                      |
+|   Airplane                                                                  |
 
 ~ Hjälpklass:
 |   Helpers         = Input-validation + countdown/pause                      |
