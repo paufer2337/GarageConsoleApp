@@ -22,7 +22,7 @@ public abstract class Vehicle
 
     public virtual string GetInfo()
     {
-        return $"{GetType().Name} | Reg: {RegNumber} | Color: {Color} | Wheels: {WheelAmount}";
+        return $"|   {GetType().Name} | RegNr: {RegNumber} | Color: {Color} | Wheels: {WheelAmount}";
     }
 
 }

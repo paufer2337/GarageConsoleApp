@@ -135,7 +135,7 @@ class Garage
         if (totalCount == 0)
         {
             Console.WriteLine("~ No parked vehicles found. ~");
-            Pause();
+            Helpers.Pause();
             return;
         }
 
@@ -149,13 +149,22 @@ class Garage
         Console.WriteLine("| -------------------------- |");
         Console.WriteLine($"| Total           | {totalCount, 8} |");
 
-        Pause();
+        Helpers.Pause();
     }
 
-    private void Pause()
+
+    public Vehicle? SearchByRegNr(string regNumber)
     {
-        Console.WriteLine();
-        Console.WriteLine("Press any key to return to menu...");
-        Console.ReadKey();
+        foreach (Vehicle? parkedVehicle in vehicles)
+        {
+            if (parkedVehicle != null && parkedVehicle.RegNumber == regNumber)
+            {
+                return parkedVehicle;
+            }
+        }
+        
+        return null;
     }
+
+   
 }

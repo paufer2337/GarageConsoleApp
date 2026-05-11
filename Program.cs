@@ -71,10 +71,10 @@ class Program
                         SearchByRegNr();
                         break;
 
-                    case "6":
+                    /*case "6":
                         SearchByProperties();
                         break;
-
+*/
                     case "7":
                         CreateGarage();
                         PopulateGarage();
@@ -280,13 +280,14 @@ class Program
         Console.WriteLine("|");
         string regNumber = Helpers.GetValidText("| Enter registration number to search: ").ToUpper();
 
-        Vehicle? foundVehicle = garage!.FindByRegNr(regNumber);
+        Vehicle? foundVehicle = garage!.SearchByRegNr(regNumber);
 
-        Console.WriteLine();
+        Console.WriteLine("|");
 
         if (foundVehicle != null)
         {
-            Console.WriteLine("Vehicle found:");
+            Console.WriteLine("| Vehicle found:");
+            Console.WriteLine("|");
             Console.WriteLine(foundVehicle.GetInfo());
         }
         else
@@ -295,7 +296,7 @@ class Program
             Console.WriteLine($"No vehicle with registration number {regNumber} found in the garage.");
         }
 
-        Helpers.CountDownToMenu();
+        Helpers.Pause();
     } 
 
     
