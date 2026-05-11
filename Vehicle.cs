@@ -12,6 +12,7 @@ public abstract class Vehicle
     public string RegNumber { get; }
     public string Color { get; }
     public int WheelAmount { get; }
+ 
 
     protected Vehicle(string regNumber, string color, int wheelAmount)
     {
@@ -22,7 +23,12 @@ public abstract class Vehicle
 
     public virtual string GetInfo()
     {
-        return $"|   {GetType().Name} | RegNr: {RegNumber} | Color: {Color} | Wheels: {WheelAmount}";
+        return $"| {GetType().Name} | {RegNumber} | {Color} | {WheelAmount}";
+    }
+
+    public virtual string GetExtraInfo()
+    {
+        return "";
     }
 
 }

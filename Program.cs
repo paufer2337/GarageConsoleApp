@@ -71,10 +71,10 @@ class Program
                         SearchByRegNr();
                         break;
 
-                    /*case "6":
+                    case "6":
                         SearchByProperties();
                         break;
-*/
+
                     case "7":
                         CreateGarage();
                         PopulateGarage();
@@ -191,27 +191,33 @@ class Program
 
         Console.WriteLine();
 
-        string regNumber = Helpers.GetValidText("Enter registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
-        string color = Helpers.GetValidText("Enter color: ");
-        int wheelAmount = Helpers.GetValidInt("Enter number of wheels: ");
-
+        string regNumber = Helpers.GetValidText("| Enter registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
+        string color = Helpers.GetValidText("| Enter color: ");
+        int wheelAmount = Helpers.GetValidInt("| Enter number of wheels: ");
+        
+        
         Vehicle? vehicle = null;
         switch (action)
         {
             case "1":
-                vehicle = new Car(regNumber, color, wheelAmount);
+                string fuelType = Helpers.GetValidText("| Enter fuel type (Gasoline/Diesel): ");
+                vehicle = new Car(regNumber, color, wheelAmount, fuelType);
                 break;
             case "2":
-                vehicle = new Motorcycle(regNumber, color, wheelAmount);
+                int cylinderVolume = Helpers.GetValidInt("| Enter cylinder volume (cc): ");
+                vehicle = new Motorcycle(regNumber, color, wheelAmount, cylinderVolume);
                 break;
             case "3":
-                vehicle = new Bus(regNumber, color, wheelAmount);
+                int seatAmount = Helpers.GetValidInt("| Enter number of seats: ");
+                vehicle = new Bus(regNumber, color, wheelAmount, seatAmount);
                 break;
             case "4":
-                vehicle = new Boat(regNumber, color, wheelAmount);
+                double length = Helpers.GetValidDouble("| Enter length (Meters): ");
+                vehicle = new Boat(regNumber, color, wheelAmount, length);
                 break;
             case "5":
-                vehicle = new Airplane(regNumber, color, wheelAmount);
+                int engineAmount = Helpers.GetValidInt("| Enter number of engines: ");
+                vehicle = new Airplane(regNumber, color, wheelAmount, engineAmount);
                 break;
             default:
                 Console.WriteLine();
@@ -298,6 +304,42 @@ class Program
 
         Helpers.Pause();
     } 
+
+
+    static void SearchByProperties()
+    {
+        Console.Clear();
+        Console.WriteLine("  ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                              |");
+        Console.WriteLine("| SEARCH VEHICLE BY PROPERTIES |");
+        Console.WriteLine("|                              |");
+        Console.WriteLine("  ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine();
+        Console.WriteLine("| [1] Type");
+        Console.WriteLine("| [2] Color");
+        Console.WriteLine("| [3] Wheels");
+        Console.WriteLine("| [4] Extra Property");
+        Console.WriteLine("|");
+        Console.WriteLine("| [0] Back");
+
+
+        Console.WriteLine();
+
+        Console.Write("Select property to search by: ");
+        string? action = Console.ReadLine();
+
+        if (action == "0")
+        {
+            return;
+        }
+
+       
+        string searchValue = Helpers.GetValidText("| Search for: ");
+
+        garage!.SearchByProperty(action, searchValue);
+
+        Helpers.Pause();
+    }
 
     
 }

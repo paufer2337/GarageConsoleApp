@@ -67,14 +67,19 @@ class Garage
         bool foundVehicle = false;
         int vehicleNr = 1;
 
-        Console.WriteLine("| No.  Type            RegNr       Color          Wheels |");
-        Console.WriteLine("| ------------------------------------------------------ |");
+        Console.WriteLine("| No.  Type       RegNr       Color        Wheels     Extra              |");
+        Console.WriteLine("| ---------------------------------------------------------------------- |");
 
         foreach (Vehicle? parkedVehicle in vehicles)
         {
             if (parkedVehicle != null)
             {
-                Console.WriteLine($"| [{vehicleNr}] {parkedVehicle.GetType().Name,-15} {parkedVehicle.RegNumber,-12} {parkedVehicle.Color,-14} {parkedVehicle.WheelAmount,-6} |");
+                Console.WriteLine($"| [{vehicleNr}] " + 
+                $"{parkedVehicle.GetType().Name,-13}" + 
+                $"{parkedVehicle.RegNumber,-12}" + 
+                $"{parkedVehicle.Color,-14}" + 
+                $"{parkedVehicle.WheelAmount,-8}" + 
+                $"{parkedVehicle.GetExtraInfo(),-19} |");
                 vehicleNr++;
                 foundVehicle = true;
             }
@@ -85,6 +90,80 @@ class Garage
             Console.WriteLine("~ No parked vehicles found. ~");
         }
     }
+
+    public void SearchByProperty(string? propertyChoice, string searchValue)
+    {
+        Console.Clear();
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                             |");
+        Console.WriteLine("|     SEARCH BY PROPERTY      |");
+        Console.WriteLine("|                             |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine();
+
+        bool foundVehicle = false;
+        int vehicleNr = 1;
+
+        string search = searchValue.ToUpper();
+
+        Console.WriteLine("| No.  Type       RegNr       Color        Wheels     Extra              |");
+        Console.WriteLine("| ---------------------------------------------------------------------- |");    
+
+        foreach (Vehicle? parkedVehicle in vehicles)
+        {
+            if (parkedVehicle == null)
+            {
+                continue;
+            };
+
+            bool match = false;
+
+
+            switch (propertyChoice)
+            {
+                case "1":
+                    match = parkedVehicle.GetType().Name.ToUpper() == search;
+                    break;
+
+                case "2":
+                    match = parkedVehicle.Color.ToUpper() == search;
+                    break;
+
+                case "3":
+                    match = parkedVehicle.WheelAmount.ToString() == search;
+                    break;
+
+                case "4":
+                    match = parkedVehicle.GetExtraInfo().ToUpper() == search;
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid property choice.");
+                    return;
+            }
+
+            if (match)
+            {
+                Console.WriteLine($"| [{vehicleNr}] " + 
+                $"{parkedVehicle.GetType().Name,-13}" + 
+                $"{parkedVehicle.RegNumber,-12}" + 
+                $"{parkedVehicle.Color,-14}" + 
+                $"{parkedVehicle.WheelAmount,-8}" + 
+                $"{parkedVehicle.GetExtraInfo(),-19} |");
+
+                vehicleNr++;
+                foundVehicle = true;
+            }
+        }
+
+        if (!foundVehicle)
+        {
+            Console.WriteLine("~ No matching vehicles found. ~");
+        }
+    }
+
+        
+
 
     public void VehiclesByType()
     {
@@ -124,6 +203,7 @@ class Garage
             {
                 airplanes++;
             }
+            else
             {
                 continue;
             }
@@ -162,9 +242,11 @@ class Garage
                 return parkedVehicle;
             }
         }
-        
+
         return null;
     }
+
+
 
    
 }
