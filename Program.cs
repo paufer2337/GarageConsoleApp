@@ -42,7 +42,7 @@ class Program
                 if (string.IsNullOrWhiteSpace(action))
                 {
                     Console.WriteLine("Invalid input. Please enter a number/action from the menu.");
-                    CountDownToMenu();
+                    Helpers.CountDownToMenu();
                     continue;
                 }
 
@@ -52,7 +52,7 @@ class Program
                 {
                     case "1":
                         garage!.ParkedVehicles();
-                        Pause();
+                        Helpers.Pause();
                         break;
                     
                     case "2":
@@ -86,7 +86,7 @@ class Program
                         break;
                     default:
                         Console.WriteLine("Invalid selection. Please choose a valid action from the menu.");
-                        CountDownToMenu();
+                        Helpers.CountDownToMenu();
                         break;
                 }
   
@@ -138,7 +138,7 @@ class Program
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine("~ Garage starts empty. ~");
-            CountDownToMenu();
+            Helpers.CountDownToMenu();
             return;
         }
         
@@ -191,9 +191,9 @@ class Program
 
         Console.WriteLine();
 
-        string regNumber = GetValidText("Enter registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
-        string color = GetValidText("Enter color: ");
-        int wheelAmount = GetValidInt("Enter number of wheels: ");
+        string regNumber = Helpers.GetValidText("Enter registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
+        string color = Helpers.GetValidText("Enter color: ");
+        int wheelAmount = Helpers.GetValidInt("Enter number of wheels: ");
 
         Vehicle? vehicle = null;
         switch (action)
@@ -216,7 +216,7 @@ class Program
             default:
                 Console.WriteLine();
                 Console.WriteLine("Invalid selection.");
-                CountDownToMenu();
+                Helpers.CountDownToMenu();
                 return;
         }
 
@@ -234,7 +234,7 @@ class Program
             Console.WriteLine("Garage is full or a vehicle with the same registration number already exists..");
         }
         
-        CountDownToMenu();
+        Helpers.CountDownToMenu();
     } 
 
 
@@ -249,7 +249,7 @@ class Program
         Console.WriteLine();
         Console.WriteLine("| Removing a vehicle from the garage.");
         Console.WriteLine("|");
-        string regNumber = GetValidText("| Enter registration number of the vehicle to remove: ").ToUpper();
+        string regNumber = Helpers.GetValidText("| Enter registration number of the vehicle to remove: ").ToUpper();
 
         bool removed = garage!.RemoveVehicle(regNumber);
 
@@ -264,7 +264,7 @@ class Program
             Console.WriteLine($"No vehicle with registration number {regNumber} found in the garage.");
         }
 
-        CountDownToMenu();
+        Helpers.CountDownToMenu();
     } 
 
     static void SearchByRegNr()
@@ -278,7 +278,7 @@ class Program
         Console.WriteLine();
         Console.WriteLine("| Searching for a vehicle by registration number.");
         Console.WriteLine("|");
-        string regNumber = GetValidText("| Enter registration number to search: ").ToUpper();
+        string regNumber = Helpers.GetValidText("| Enter registration number to search: ").ToUpper();
 
         Vehicle? foundVehicle = garage!.FindByRegNr(regNumber);
 
@@ -295,74 +295,8 @@ class Program
             Console.WriteLine($"No vehicle with registration number {regNumber} found in the garage.");
         }
 
-        CountDownToMenu();
+        Helpers.CountDownToMenu();
     } 
 
-    static string GetValidText(string message)
-    {
-        Console.Write(message);
-        
-        string? input = Console.ReadLine();
-
-        while (string.IsNullOrWhiteSpace(input))
-        {
-            
-            Console.WriteLine("Input cannot be empty. Please try again.");
-            Console.WriteLine();
-            input = Console.ReadLine();
-        }
-     
-
-        return input;
-    }
-
-    static int GetValidInt(string message)
-    {
-        Console.Write(message);
-        
-        int value;
-        while (!int.TryParse(Console.ReadLine(), out value) || value < 0)
-        {
-            Console.WriteLine("Invalid input. Please enter a valid non-negative integer.");
-            Console.WriteLine();
-        }
-
-        return value;
-    }
-
-    static double GetValidDouble(string message)
-    {
-        Console.Write(message);
-        
-        double value;
-        while (!double.TryParse(Console.ReadLine(), out value) || value < 0)
-        {
-            Console.WriteLine("Invalid input. Please enter a valid number.");
-            Console.WriteLine();
-        }
-
-        return value;
-    }
-
-    static void Pause()
-    {
-    Console.WriteLine();
-    Console.WriteLine("Press any key to return to menu...");
-    Console.ReadKey();
-    }
-
-
-    static void CountDownToMenu()
-    {
-        Console.WriteLine();
-
-        for (int i = 3; i > 0; i--)
-        {
-            Console.Write($"\rReturning to menu in {i}...   ");
-            Thread.Sleep(1000);
-        }
-
-        Console.WriteLine();
-
-    }
+    
 }
