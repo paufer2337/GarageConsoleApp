@@ -41,6 +41,19 @@ class Garage
         return false;
     }
 
+    public bool RemoveVehicle(string regNumber)
+    {
+        for (int i = 0; i < Capacity; i++)
+        {
+            if (vehicles[i] != null && vehicles[i]!.RegNumber.ToUpper() == regNumber.ToUpper())
+            {
+                vehicles[i] = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void ParkedVehicles()
     {
         Console.Clear();
@@ -54,7 +67,7 @@ class Garage
         bool foundVehicle = false;
         int vehicleNr = 1;
 
-        Console.WriteLine("| No.   Type            RegNr       Color         Wheels |");
+        Console.WriteLine("| No.  Type            RegNr       Color          Wheels |");
         Console.WriteLine("| ------------------------------------------------------ |");
 
         foreach (Vehicle? parkedVehicle in vehicles)
@@ -71,5 +84,78 @@ class Garage
         {
             Console.WriteLine("~ No parked vehicles found. ~");
         }
+    }
+
+    public void VehiclesByType()
+    {
+        Console.Clear();
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                             |");
+        Console.WriteLine("|   VEHICLES BY TYPE / QTY    |");
+        Console.WriteLine("|                             |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine();
+
+        int cars = 0;
+        int motorcycles = 0;
+        int buses = 0;
+        int boats = 0;
+        int airplanes = 0;
+
+        foreach (Vehicle? parkedVehicle in vehicles)
+        {
+            if (parkedVehicle is Car)
+            {
+                cars++;
+            }
+            else if (parkedVehicle is Motorcycle)
+            {
+                motorcycles++;
+            }
+            else if (parkedVehicle is Bus)
+            {
+                buses++;
+            }
+            else if (parkedVehicle is Boat)
+            {
+                boats++;
+            }
+            else if (parkedVehicle is Airplane)
+            {
+                airplanes++;
+            }
+            {
+                continue;
+            }
+   
+        }
+
+        int totalCount = cars + motorcycles + buses + boats + airplanes;
+
+        if (totalCount == 0)
+        {
+            Console.WriteLine("~ No parked vehicles found. ~");
+            Pause();
+            return;
+        }
+
+        Console.WriteLine("| Type            | Quantity |");
+        Console.WriteLine("| -------------------------- |");
+        Console.WriteLine($"| Car             | {cars, 8} |");
+        Console.WriteLine($"| Motorcycle      | {motorcycles, 8} |");
+        Console.WriteLine($"| Bus             | {buses, 8} |");
+        Console.WriteLine($"| Boat            | {boats, 8} |");
+        Console.WriteLine($"| Airplane        | {airplanes, 8} |");
+        Console.WriteLine("| -------------------------- |");
+        Console.WriteLine($"| Total           | {totalCount, 8} |");
+
+        Pause();
+    }
+
+    private void Pause()
+    {
+        Console.WriteLine();
+        Console.WriteLine("Press any key to return to menu...");
+        Console.ReadKey();
     }
 }

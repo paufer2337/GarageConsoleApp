@@ -54,19 +54,19 @@ class Program
                         garage!.ParkedVehicles();
                         Pause();
                         break;
-                    /*
+                    
                     case "2":
                         garage!.VehiclesByType();
                         break;
-                    */
+                    
                     case "3":
                         AddVehicle();
                         break;
-                    /*
+                    
                     case "4":
                         RemoveVehicle();
                         break;
-
+                    /*
                     case "5":
                         SearchByRegNr();
                         break;
@@ -141,9 +141,9 @@ class Program
             CountDownToMenu();
             return;
         }
-        Console.Clear();
-        Console.WriteLine();
-        Console.WriteLine("How many vehicles do you want to add? (max " + garage!.Capacity + "): ");
+        
+        Console.WriteLine("|");
+        Console.WriteLine("| How many vehicles do you want to add? (max " + garage!.Capacity + "): ");
 
         int amount;
         while (!int.TryParse(Console.ReadLine(), out amount) || amount < 1 || amount > garage!.Capacity)
@@ -228,16 +228,44 @@ class Program
         if (added)
         {
             Console.WriteLine($"Vehicle {vehicle.RegNumber} added to the garage.");
-            CountDownToMenu();
         }
         else
         {
-            Console.WriteLine("Garage is full. Cannot add more vehicles.");
-            CountDownToMenu();
+            Console.WriteLine("Garage is full or a vehicle with the same registration number already exists..");
         }
         
-        
-    }   
+        CountDownToMenu();
+    } 
+
+
+    static void RemoveVehicle()
+    {
+        Console.Clear();
+        Console.WriteLine(" ▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+        Console.WriteLine("|                             |");
+        Console.WriteLine("| ==== REMOVE A VEHICLE ====  |");
+        Console.WriteLine("|                             |");
+        Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        Console.WriteLine();
+        Console.WriteLine("| Removing a vehicle from the garage.");
+        Console.WriteLine("|");
+        string regNumber = GetValidText("| Enter registration number of the vehicle to remove: ").ToUpper();
+
+        bool removed = garage!.RemoveVehicle(regNumber);
+
+        Console.WriteLine();
+
+        if (removed)
+        {
+            Console.WriteLine($"Vehicle {regNumber} removed from the garage.");
+        }
+        else
+        {
+            Console.WriteLine($"No vehicle with registration number {regNumber} found in the garage.");
+        }
+
+        CountDownToMenu();
+    }  
 
     static string GetValidText(string message)
     {
