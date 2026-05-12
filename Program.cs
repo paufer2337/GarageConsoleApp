@@ -318,7 +318,6 @@ class Program
         Console.WriteLine("| [1] Type");
         Console.WriteLine("| [2] Color");
         Console.WriteLine("| [3] Wheels");
-        Console.WriteLine("| [4] Extra Property");
         Console.WriteLine("|");
         Console.WriteLine("| [0] Back");
 

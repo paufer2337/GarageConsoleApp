@@ -134,10 +134,6 @@ class Garage
                     match = parkedVehicle.WheelAmount.ToString() == search;
                     break;
 
-                case "4":
-                    match = parkedVehicle.GetExtraInfo().ToUpper() == search;
-                    break;
-
                 default:
                     Console.WriteLine("Invalid property choice.");
                     return;
