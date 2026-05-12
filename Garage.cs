@@ -40,7 +40,35 @@ class Garage
             }
         }
         return false;
+
+        
     }
+        public bool garageFUll()
+        {
+            for (int i = 0; i < Capacity; i++)
+            {
+                if (vehicles[i] == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool RegNrExists(string regNumber)
+        {
+            
+            string checkRegNr = regNumber.Replace(" ", "").Replace("-", "").ToUpper();
+            
+            foreach (Vehicle? parkedVehicle in vehicles)
+            {
+                if (parkedVehicle != null && parkedVehicle.RegNumber.ToUpper() == checkRegNr)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
     public bool RemoveVehicle(string regNumber)
     {

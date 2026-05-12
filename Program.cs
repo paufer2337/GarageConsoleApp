@@ -192,6 +192,21 @@ class Program
         Console.WriteLine();
 
         string regNumber = Helpers.GetValidText("| Enter registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
+
+        while (garage!.RegNrExists(regNumber)) 
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"| Registration number {regNumber} is not unique.");
+            Console.Write("| There is already a vehicle registered with that number.");
+            Console.WriteLine();
+            Console.ResetColor();
+
+            Console.WriteLine();
+            regNumber = Helpers.GetValidText("| Please enter a unique registration number: ").Replace(" ", "").Replace("-", "").ToUpper();
+        }
+
+
         string color = Helpers.GetValidText("| Enter color: ");
         int wheelAmount = Helpers.GetValidInt("| Enter number of wheels: ");
         
@@ -237,7 +252,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("Garage is full or a vehicle with the same registration number already exists..");
+            Console.WriteLine("Vehicle could not be added.");
         }
         
         Helpers.CountDownToMenu();
