@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 
@@ -29,7 +28,7 @@ public static class Helpers
     public static int GetValidInt(string message)
     {
         Console.Write(message);
-        
+
         int value;
         while (!int.TryParse(Console.ReadLine(), out value) || value < 0)
         {
