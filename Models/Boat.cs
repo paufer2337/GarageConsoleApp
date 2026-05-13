@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace GarageConsoleApp;
 
-class Boat : Vehicle
+public class Boat : Vehicle
 {
     public double Length { get; }
 

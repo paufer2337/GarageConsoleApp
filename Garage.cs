@@ -8,7 +8,7 @@ using System.Threading;
 namespace GarageConsoleApp;
 
 
-class Garage
+public class Garage
 {
     private Vehicle?[] vehicles;
     public int Capacity { get; }
@@ -187,7 +187,6 @@ class Garage
         }
     }
 
-        
 
 
     public void VehiclesByType()
@@ -272,6 +271,23 @@ class Garage
     }
 
 
+    public Vehicle?[] GetVehicles()
+    {
+        return vehicles;
+    }
 
-   
+    
+    public bool IsFull()
+    {
+        for (int i = 0; i < Capacity; i++)
+        {
+            if (vehicles[i] == null)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
 }

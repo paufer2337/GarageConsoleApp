@@ -28,11 +28,16 @@ class Program
                 Console.WriteLine();
                 Console.WriteLine("| [1] List all parked vehicles       |");
                 Console.WriteLine("| [2] Sort vehicle by type/quantity  |");
+                Console.WriteLine("|                                    |");
                 Console.WriteLine("| [3] ADD vehicle                    |");
                 Console.WriteLine("| [4] REMOVE vehicle                 |");
+                Console.WriteLine("|                                    |");
                 Console.WriteLine("| [5] Search by registration number  |");
                 Console.WriteLine("| [6] Search by vehicle properties   |");
+                Console.WriteLine("|                                    |");
                 Console.WriteLine("| [7] Create new garage              |");
+                Console.WriteLine("|                                    |");
+                Console.WriteLine("| [8] Load garage from data file     |");
                 Console.WriteLine("|                                    |");
                 Console.WriteLine("| [99] Exit");
                 Console.WriteLine();
@@ -76,14 +81,47 @@ class Program
                         break;
 
                     case "7":
-                        CreateGarage();
+                        Console.Clear();
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("|");
+                        Console.WriteLine("| WARNING:");
+                        Console.WriteLine("| Creating a new garage will replace the current garage in memory.");
+                        Console.WriteLine("| Autosave may overwrite the saved file when new vehicles are added.");
+                        Console.WriteLine("|");
+                        Console.ResetColor();
+                        Console.WriteLine("|");
+                        Console.WriteLine("| You can still load previously saved vehicles if you don't");
+                        Console.WriteLine("| add any vehicles and only create a new empty garage.");
+                        Console.WriteLine("|");
+                        Console.WriteLine("| Do you want to continue creating a new garage? (y/n): ");
+                        
+                        string? input = Console.ReadLine();
+                        
+                        if (input?.ToLower() != "y")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("~ Action cancelled. Returning to menu. ~");
+                            Helpers.CountDownToMenu();
+                            break;
+                        }
+
+                        Helpers.Pause();
+                        
+                        CreateGarage(); 
                         PopulateGarage();
+                        break;
+
+                    case "8":
+                        FileHandler.LoadFromFile(garage!);
+                        Helpers.Pause();
                         break;
 
                     case "99":
                         Console.WriteLine("Exiting the program...");
                         Thread.Sleep(800);
                         break;
+
                     default:
                         Console.WriteLine("Invalid selection. Please choose a valid action from the menu.");
                         Helpers.CountDownToMenu();
@@ -169,6 +207,22 @@ class Program
         Console.WriteLine("| ==== ADD A NEW VEHICLE ==== |");
         Console.WriteLine("|                             |");
         Console.WriteLine(" ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+        
+        if (garage!.IsFull())
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("|");
+            Console.WriteLine("|");
+            Console.WriteLine("| Garage is full. Cannot add more vehicles.");
+            Console.WriteLine("|");
+            Console.WriteLine("| Please remove a vehicle before adding a new one.");
+            Console.WriteLine("| Or create a new garage with larger capacity.");
+            Console.ResetColor();
+
+            Helpers.Pause();
+            return;
+        }
+
         Console.WriteLine();
         Console.WriteLine("| Adding a new vehicle to the garage.");
         Console.WriteLine("|");
@@ -248,11 +302,13 @@ class Program
 
         if (added)
         {
-            Console.WriteLine($"Vehicle {vehicle.RegNumber} added to the garage.");
+            Console.WriteLine($"| Vehicle {vehicle.RegNumber} added to the garage.");
+
+            FileHandler.SaveToFile(garage!);
         }
         else
         {
-            Console.WriteLine("Vehicle could not be added.");
+            Console.WriteLine(" Vehicle could not be added.");
         }
         
         Helpers.CountDownToMenu();
@@ -279,6 +335,8 @@ class Program
         if (removed)
         {
             Console.WriteLine($"Vehicle {regNumber} removed from the garage.");
+
+            FileHandler.SaveToFile(garage!);
         }
         else
         {

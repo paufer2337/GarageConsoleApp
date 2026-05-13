@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace GarageConsoleApp;
 
-class Car : Vehicle
+public class Car : Vehicle
 {
     public string FuelType { get; }
     

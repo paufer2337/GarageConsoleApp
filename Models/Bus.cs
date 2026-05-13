@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 
 
 namespace GarageConsoleApp;
 
-class Bus : Vehicle
+public class Bus : Vehicle
 {
     public int SeatAmount { get; }
 

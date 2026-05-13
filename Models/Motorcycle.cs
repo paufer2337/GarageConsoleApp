@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 
 
 namespace GarageConsoleApp;
 
-class Motorcycle : Vehicle
+public class Motorcycle : Vehicle
 {
     public int CylinderVolume { get; }
 

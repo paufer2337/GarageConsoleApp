@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace GarageConsoleApp;
 
-class Airplane : Vehicle
+public class Airplane : Vehicle
 {
     public int EngineAmount { get; }
 
