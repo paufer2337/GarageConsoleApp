@@ -115,6 +115,29 @@ ___________________________________________________________
 ===========================================================
 
 
+¤ Filhantering / Persistence:
+
+
+|   FileHandler.cs    = Hanterar save/load via CSV-fil                        |
+|   SaveToFile        = Sparar garage-data till garage.csv                    |
+|   LoadFromFile      = Läser in sparade fordon från CSV-fil                  |
+|   Autosave          = Sparar automatiskt vid add/remove                     |
+|   CSV-format        = Semikolon-separerad fordonsdata                       |
+|   Data/garage.csv   = Persistent lagring av garage-data                     |
+
+===========================================================
+
+
+¤ Unit Testing:
+
+
+|   App.Tests         = Separat xUnit testprojekt                             |
+|   xUnit             = Ramverk för enhetstester                              |
+|   AddVehicle tests  = Testar add/logik + duplicate regnr                    |
+|   Assertions        = Assert.True / Assert.False                            |
+
+===========================================================
+
 cmd:
 dotnet run
 
